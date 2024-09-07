@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://unpkg.com/typed.js@2.0.15/dist/typed.umd.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+    <div class="logo">
+        <img src="logo.jpg" >
+        </div>
+    <div class="navbar">
+        <a href="#home">Home</a>
+        <a href="#about-me">About me</a>
+        <a href="#skill" >My Skills</a>
+        <a href="#contactme" data-page="Contact">Contact</a>
+
+        <select id="modeSelect" onchange="changeMode()">
+            <option value="">Mode</option>
+            <option value="dark">Dark</option>
+            <option value="original">original</option>
+        </select>
+        
+               
+    </div>
+    </div>
+
+    <section id="home">
+    <div class="Home">
+        <div class="Home-content">
+            <h3>Hello, It's Me</h3>
+            <h1>Ranjita Rai</h1>
+            <h3>And I'm a</h3>
+            <span>Web developer</span>
+            <div class="social-link">
+                <a href="https://www.facebook.com/profile.php?id=100067637703022"  class="social-link" data-social="facebook"><i class="fab fa-facebook-f"></i></a>
+    
+                <a href="https://www.instagram.com/ran_zee_taa_/?fbclid=IwY2xjawFHjOJleHRuA2FlbQIxMAABHSRy2H-FKnhXTnARMXKEgvOlKNfLHPocVEb3KrioPuPDlc4AFP4NpKw7LQ_aem_l3LBBnxkZUfOE1_1Ajgr4g" class="social-link" data-social="instagram"><i class="fab fa-instagram"></i></a> 
+                <a href="https://github.com/Ranjita-Rai" class="social-link" data-social="github"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/ranjita-rai-28ba1b261" class="social-link" data-social="linkedin"><i class="fab fa-linkedin"></i></a>
+               
+            </div>
+            
+        </div>
+       
+        <div class="photo">
+            <img src="ppimage.jpeg" alt="PP">
+        </div>     
+        
+     </div>
+    </section>
+
+<section id="about-me">
+    <div class="aboutme">
+        <div class="photoss">
+            <img src="abtme.jpg">
+        </div>
+      <div class="mee">
+        <h1>About me</h1>
+        <p>I’m Ranjita, a web designer and frontend developer specializing in creating beautiful and user-friendly websites using Figma for UI design and coding with HTML, CSS,and JavaScript.</p>
+        </div>
+    
+    </div>
+</section>
+
+<section id="skill">
+<div class="myskills">
+    <div class="skills">
+        <h1>My Skills</h1>
+    
+        
+        <h2>Html</h2>
+        <div class="progress-bar">
+            <div class="html"><span>85%</span>
+            </div>
+        </div>
+
+        <h2>CSS</h2>
+        <div class="progress-bar">
+            <div class="cs"><span>70%</span>
+            </div>
+        </div>
+
+        <h2>Java</h2>
+        <div class="progress-bar">
+            <div class="java"><span>60%</span>
+            </div>
+        </div>
+
+
+        <h2>JavaScript</h2>
+        <div class="progress-bar">
+            <div class="javascript"><span>55%</span>
+            </div>
+        </div>
+
+        <h2>PHP</h2>
+        <div class="progress-bar">
+            <div class="php"><span>50%</span>
+            </div>
+        </div>
+
+        <h2>Python</h2>
+        <div class="progress-bar">
+            <div class="python"><span>40%</span>
+            </div>
+        </div>
+       
+        
+    </div>
+</div>
+</section>
+
+
+
+<section id="contactme">
+    <div class="contact">
+        <!-- <div class="head">
+            <h1>Contact Me</h1>
+
+        </div> -->
+        
+        <div class="contactMe">
+            <h1>Contact info</h1>
+            <div class="email">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                  <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.981-1.166L8 8.83 6.761 8.83z"/>
+                </svg>
+                <a href="mailto:ranjitari350@gmail.com">ranjitari350@gmail.com</a>
+            </div>
+              <div class="location">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Kathmandu
+              </div>
+        </div>
+
+
+
+
+<div class="formm">
+        <h1>Send message</h1>
+        <form name="myform" onsubmit="return validate()">
+        <div class="form-container">
+            <div>
+                <!-- <label for="name">Name:</label> -->
+                <input type="text" id="name" name="name" placeholder="Enter your Name">
+              </div>
+              <div>
+                <!-- <label for="email">Email:</label> -->
+                <input type="email" id="email" name="email" placeholder="Enter your Email">
+              </div>
+              <div>
+                <!-- <label for="message">Message:</label> -->
+                <textarea id="message" name="message" cols="30" rows="10" placeholder="Enter your message"></textarea>
+              </div>
+              <div>
+              <input type="submit" name="send" value="send"></div>
+        </div>
+    </form>
+    </div>
+
+    </div>
+</section>
+
+
+
+    <div class="footer">
+        <div class="social-link">
+            <a href="https://www.facebook.com/profile.php?id=100067637703022"  class="social-link" data-social="facebook"><i class="fab fa-facebook-f"></i></a>
+
+            <a href="https://www.instagram.com/ran_zee_taa_/?fbclid=IwY2xjawFHjOJleHRuA2FlbQIxMAABHSRy2H-FKnhXTnARMXKEgvOlKNfLHPocVEb3KrioPuPDlc4AFP4NpKw7LQ_aem_l3LBBnxkZUfOE1_1Ajgr4g" class="social-link" data-social="instagram"><i class="fab fa-instagram"></i></a> 
+            <a href="https://github.com/Ranjita-Rai" class="social-link" data-social="github"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/ranjita-rai-28ba1b261" class="social-link" data-social="linkedin"><i class="fab fa-linkedin"></i></a>
+           
+        </div>
+        <p>Copyright © www.ranjita1.com.np | Right Reserved</p>
+</div>
+     <script src="main.js"></script>
+    
+    
+</body>
+</html>

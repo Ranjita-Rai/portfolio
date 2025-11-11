@@ -1,76 +1,263 @@
-
+// Function to handle Dark/Light Mode toggle using the button icon
 function changeMode() {
-    var selectedMode = document.getElementById('modeSelect').value;
-    
-    if (selectedMode === 'dark') {
-        document.body.classList.add('dark-mode');
-        document.body.style.backgroundImage = "none";  // Clear any background image
-        document.body.style.backgroundColor = "black"; // Set dark mode background color
+    const body = document.getElementById('body-main');
+    const toggleButton = document.getElementById('mode-toggle');
+    const icon = toggleButton.querySelector('i');
+
+    // Check if the body currently has the light-mode class
+    const isLightMode = body.classList.contains('light-mode');
+
+    if (isLightMode) {
+        // Switch to Dark Mode
+        body.classList.remove('light-mode');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        toggleButton.setAttribute('aria-label', 'Toggle Light Mode');
     } else {
-        document.body.classList.remove('dark-mode');
-        document.body.style.backgroundImage = "linear-gradient(to right, #000428, #004e92)"; // Light mode gradient
-        document.body.style.backgroundColor = ""; // Reset background color
+        // Switch to Light Mode
+        body.classList.add('light-mode');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        toggleButton.setAttribute('aria-label', 'Toggle Dark Mode');
     }
 }
 
-
-
-function validate(){
-    var name=document.myform.name.value;
-    var E=document.myform.email.value;
-    var atposition=E.indexOf("@");
-    var dotposition=E.lastIndexOf(".");
-    if(name==" "){
-        alert("name cannot be empty");
-        return false;
-    }else if(name.length<5){
-        alert("Enter your full name");
-    }else if(atposition<1 || dotposition<atposition+2 || dotposition+2>=E.length){
-        alert("Please enter a valid e-mail address ");
-        return false;
+// Attach the mode toggle function to the button
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('mode-toggle');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', changeMode);
     }
-    else{
-        return true;
-    }
-}
-// Get all social links
-const socialLinks = document.querySelectorAll('.social-link');
-
-// Define social media URLs
-const socialUrls = {
-  instagram: 'https://www.instagram.com/ran_zee_taa_/?fbclid=IwY2xjawFHjOJleHRuA2FlbQIxMAABHSRy2H-FKnhXTnARMXKEgvOlKNfLHPocVEb3KrioPuPDlc4AFP4NpKw7LQ_aem_l3LBBnxkZUfOE1_1Ajgr4g',
-  facebook: 'https://www.facebook.com/profile.php?id=100067637703022',
-  github: 'https://github.com/Ranjita-Rai',
-  linkedin: 'https://www.linkedin.com/in/ranjita-rai-28ba1b261'
-};
-
-// Add event listener to each social link
-socialLinks.forEach((link) => {
-  link.addEventListener('click', (e) => {
-    // Prevent default link behavior
-    e.preventDefault();
-
-    // Get social media platform from data attribute
-    const social = link.getAttribute('data-social');
-
-    // Open social media page in new tab
-    window.open(socialUrls[social], '_blank');
-  });
 });
 
-//for disabling inspect
- document.addEventListener('contextmenu', function(e) {
-     e.preventDefault();
-   });
+
+// Client-side form validation and custom message display
+function validate(){
+    const name = document.myform.name.value.trim();
+    const email = document.myform.email.value.trim();
+    const message = document.myform.message.value.trim();
+    const formMessage = document.getElementById('form-message');
+    
+    // Helper function to show message
+    const showMessage = (msg, isError = true) => {
+        formMessage.textContent = msg;
+        formMessage.classList.remove('hidden');
+        if (isError) {
+            formMessage.style.backgroundColor = '#ff00001a';
+            formMessage.style.borderColor = '#ff0000';
+            formMessage.style.color = '#ff0000';
+        } else {
+            formMessage.style.backgroundColor = '#00e0ff1a';
+            formMessage.style.borderColor = '#00e0ff';
+            formMessage.style.color = '#00e0ff';
+        }
+    };
+
+    // 1. Name validation
+    if(name === "" || name.length < 5){
+        showMessage("Please enter your full name (at least 5 characters).");
+        return false;
+    } 
+    
+    // 2. Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+        showMessage("Please enter a valid e-mail address.");
+        return false;
+    }
+
+    // 3. Message validation
+    if (message.length < 10) {
+        showMessage("Your message must be at least 10 characters long.");
+        return false;
+    }
+
+    showMessage("Message sent successfully!", false);
+
+    // Prevent default form submission (comment this out if you integrate a real backend endpoint)
+    return false;
+}
+
+// // Disabling right-click context menu
+// document.addEventListener('contextmenu', function(e) {
+//      e.preventDefault();
+// });
   
-//for click links of navbar
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+// Smooth scrolling for navigation links
+document.querySelectorAll('.navbar a, .btn').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
+      const href = this.getAttribute('href');
+      // Only handle internal section links starting with #
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        document.querySelector(href).scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
     });
-  });
+});
 
+
+
+// Mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            // Change icon based on menu state
+            const icon = menuToggle.querySelector('i');
+            if (navbar.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+    
+    // Close mobile menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+    });
+});// Function to handle Dark/Light Mode toggle using the button icon
+function changeMode() {
+    const body = document.getElementById('body-main');
+    const toggleButton = document.getElementById('mode-toggle');
+    const icon = toggleButton.querySelector('i');
+
+    // Check if the body currently has the light-mode class
+    const isLightMode = body.classList.contains('light-mode');
+
+    if (isLightMode) {
+        // Switch to Dark Mode
+        body.classList.remove('light-mode');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+        toggleButton.setAttribute('aria-label', 'Toggle Light Mode');
+    } else {
+        // Switch to Light Mode
+        body.classList.add('light-mode');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+        toggleButton.setAttribute('aria-label', 'Toggle Dark Mode');
+    }
+}
+
+// Attach the mode toggle function to the button
+document.addEventListener('DOMContentLoaded', () => {
+    const toggleButton = document.getElementById('mode-toggle');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', changeMode);
+    }
+});
+
+
+// Client-side form validation and custom message display
+function validate(){
+    const name = document.myform.name.value.trim();
+    const email = document.myform.email.value.trim();
+    const message = document.myform.message.value.trim();
+    const formMessage = document.getElementById('form-message');
+    
+    // Helper function to show message
+    const showMessage = (msg, isError = true) => {
+        formMessage.textContent = msg;
+        formMessage.classList.remove('hidden');
+        if (isError) {
+            formMessage.style.backgroundColor = '#ff00001a';
+            formMessage.style.borderColor = '#ff0000';
+            formMessage.style.color = '#ff0000';
+        } else {
+            formMessage.style.backgroundColor = '#00e0ff1a';
+            formMessage.style.borderColor = '#00e0ff';
+            formMessage.style.color = '#00e0ff';
+        }
+    };
+
+    // 1. Name validation
+    if(name === "" || name.length < 5){
+        showMessage("Please enter your full name (at least 5 characters).");
+        return false;
+    } 
+    
+    // 2. Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(email)){
+        showMessage("Please enter a valid e-mail address.");
+        return false;
+    }
+
+    // 3. Message validation
+    if (message.length < 10) {
+        showMessage("Your message must be at least 10 characters long.");
+        return false;
+    }
+
+    showMessage("Message sent successfully!", false);
+
+    // Prevent default form submission (comment this out if you integrate a real backend endpoint)
+    return false;
+}
+
+// // Disabling right-click context menu
+// document.addEventListener('contextmenu', function(e) {
+//      e.preventDefault();
+// });
+  
+// Smooth scrolling for navigation links
+document.querySelectorAll('.navbar a, .btn').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      // Only handle internal section links starting with #
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        document.querySelector(href).scrollIntoView({
+          behavior: 'smooth'
+        });
+      }
+    });
+});
+
+
+
+// Mobile menu toggle functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelectorAll('.nav-link');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navbar.classList.toggle('active');
+            // Change icon based on menu state
+            const icon = menuToggle.querySelector('i');
+            if (navbar.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    }
+    
+    // Close mobile menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navbar.classList.remove('active');
+            const icon = menuToggle.querySelector('i');
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        });
+    });
+});

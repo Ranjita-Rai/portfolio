@@ -10,14 +10,14 @@ function changeMode() {
     if (isLightMode) {
         // Switch to Dark Mode
         body.classList.remove('light-mode');
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
         toggleButton.setAttribute('aria-label', 'Toggle Light Mode');
     } else {
         // Switch to Light Mode
         body.classList.add('light-mode');
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
         toggleButton.setAttribute('aria-label', 'Toggle Dark Mode');
     }
 }
